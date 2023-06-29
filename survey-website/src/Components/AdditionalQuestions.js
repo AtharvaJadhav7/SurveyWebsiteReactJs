@@ -5,6 +5,9 @@ export default function AdditionalQuestions({addQuestionData}) {
   const [profession, setProfession] = useState("");
   const [interest, setInterest] = useState("");
   const [reference, setReference] = useState("");
+  const [otherProfession, setOtherProfession] = useState("");
+  const [otherInterest, setOtherInterest] = useState("");
+  const [otherReference, setOtherReference] = useState("");
   const navigate = useNavigate();
 
   const submit = (e) => {
@@ -12,6 +15,18 @@ export default function AdditionalQuestions({addQuestionData}) {
     if (!profession || !interest || !reference) {
       alert("All fields necessary!");
     } else {
+      if(profession==="Others")
+      {
+        profession=otherProfession;
+      }
+      if(interest==="Others")
+      {
+        interest=otherInterest;
+      }
+      if(reference==="Others")
+      {
+        reference=otherReference;
+      }
       console.log(profession, interest, reference);
       addQuestionData(profession,interest,reference);
       navigate('/details');
@@ -90,6 +105,8 @@ export default function AdditionalQuestions({addQuestionData}) {
                     id="otherProfession"
                     autoComplete="off"
                     className="form-control mx-1"
+                    value={otherProfession}
+                    onChange={(e)=>{setOtherProfession(e.target.value)}}
                   />
                   <br />
                   <hr />
@@ -154,6 +171,8 @@ export default function AdditionalQuestions({addQuestionData}) {
                     id="otherInterest"
                     autoComplete="off"
                     className="form-control mx-1"
+                    value={otherInterest}
+                    onChange={(e)=>{setOtherInterest(e.target.value)}}
                   />
                   <br />
                   <hr />
@@ -208,6 +227,8 @@ export default function AdditionalQuestions({addQuestionData}) {
                     id="otherReference"
                     autoComplete="off"
                     className="form-control mx-1"
+                    value={otherReference}
+                    onChange={(e)=>{setOtherReference(e.target.value)}}
                   />
                   <br />
                 </div>

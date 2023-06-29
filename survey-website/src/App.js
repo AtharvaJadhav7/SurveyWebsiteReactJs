@@ -7,19 +7,15 @@ import BasicInfo from './Components/BasicInfo';
 import AdditionalQuestions from './Components/AdditionalQuestions';
 import EnteredDetails from './Components/EnteredDetails';
 import ThankYouPage from './Components/ThankYouPage';
+import { About } from './Components/About';
 
 function App() {
-  let initBasicData;
-  if (localStorage.getItem('data') === null) {
-    initBasicData = {};
-  } else {
-    initBasicData = JSON.parse(localStorage.getItem('data'));
-  }
+  const initBasicData = JSON.parse(localStorage.getItem('data')) ?? {};
   
-  const [basicData, setBasicData] = useState(
-    initBasicData
-  );
-
+  const [basicData, setBasicData] = useState(initBasicData);
+  useEffect(() => {
+    JSON.parse(localStorage.getItem('data'));
+  }, [basicData]);
   const addBasicData = (name,email,contact)=>{
     console.log("I am adding", name, email, contact);
     const myBasicData={
@@ -28,20 +24,17 @@ function App() {
       contact: contact
     }
     console.log(myBasicData);
-    setBasicData([basicData,myBasicData])
+    setBasicData(myBasicData);
+    console.log(basicData);
     localStorage.setItem("data", JSON.stringify(myBasicData));
   }
 
-  let initQuestionsData;
-  if (localStorage.getItem('questiondata') === null) {
-    initQuestionsData = {};
-  } else {
-    initQuestionsData = JSON.parse(localStorage.getItem('questiondata'));
-  }
+  const initQuestionsData = JSON.parse(localStorage.getItem('questiondata')) ?? {};
 
-  const [questiondData, setQuestionData] = useState(
-    initQuestionsData
-  );
+  const [questiondData, setQuestionData] = useState(initQuestionsData);
+  useEffect(() => {
+    JSON.parse(localStorage.getItem('questiondata'));
+  }, [questiondData]);
 
   const addQuestionData = (profession,interest,reference)=>{
     console.log("I am adding", profession, interest, reference);
@@ -51,7 +44,7 @@ function App() {
       reference: reference
     }
     console.log(myQuestionData);
-    setQuestionData([questiondData,myQuestionData])
+    setQuestionData(myQuestionData);
     localStorage.setItem("questiondata", JSON.stringify(myQuestionData));
   }
 
@@ -74,6 +67,12 @@ function App() {
           path='/thanks'
           element={
             <ThankYouPage/>
+          }
+        />
+        <Route
+          path='/about'
+          element={
+            <About/>
           }
         />
       </Routes>

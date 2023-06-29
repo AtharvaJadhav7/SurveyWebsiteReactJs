@@ -1,0 +1,13 @@
+<div>
+      <Header />
+
+      <BasicInfo addBasicData={addBasicData} />
+
+
+      <AdditionalQuestions addQuestionData={addQuestionData} />
+
+
+      <EnteredDetails data={basicData} questiondData={questiondData />
+
+      <Footer />
+    </div>
